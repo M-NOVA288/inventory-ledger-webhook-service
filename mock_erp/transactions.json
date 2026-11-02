@@ -1,0 +1,9 @@
+[
+  {"doc_number": "4900012301", "txn_type": "GI",  "plant": "HOU1", "material": "PC-20981", "qty": 20},
+  {"doc_number": "5000088140", "txn_type": "GR",  "plant": "DAL1", "material": "PC-10432", "qty": 120},
+  {"doc_number": "4900012302", "txn_type": "GI",  "plant": "HOU1", "material": "PC-20981", "qty": 18},
+  {"doc_number": "4900012303", "txn_type": "GI",  "plant": "DAL1", "material": "PC-30112", "qty": 30},
+  {"doc_number": "ADJ-77310",  "txn_type": "ADJ", "plant": "LRD1", "material": "RG-4410",  "qty": -6},
+  {"doc_number": "4900012304", "txn_type": "GI",  "plant": "LRD1", "material": "PC-20981", "qty": 500},
+  {"doc_number": "4900012305", "txn_type": "XFER","plant": "HOU1", "material": "PC-10432", "qty": 10}
+]

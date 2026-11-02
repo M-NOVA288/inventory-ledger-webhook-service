@@ -1,0 +1,30 @@
+# Runs the service against PostgreSQL, with n8n alongside to receive alerts.
+#   docker compose up --build
+# Then import n8n/low_stock_alert_workflow.json at http://localhost:5678
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: inventory
+      POSTGRES_PASSWORD: inventory
+      POSTGRES_DB: inventory
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U inventory"]
+      interval: 3s
+      retries: 10
+
+  n8n:
+    image: n8nio/n8n:latest
+    ports: ["5678:5678"]
+
+  api:
+    build: .
+    depends_on:
+      postgres: { condition: service_healthy }
+    environment:
+      DATABASE_URL: postgresql://inventory:inventory@postgres:5432/inventory
+      ALERT_WEBHOOK_URL: http://n8n:5678/webhook/inventory-low-stock
+      ALERT_WEBHOOK_SECRET: change-me
+    ports: ["8000:8000"]
+    command: ["python", "-m", "inventory_service", "--host", "0.0.0.0", "--seed"]
